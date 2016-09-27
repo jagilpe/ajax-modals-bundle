@@ -1,0 +1,37 @@
+{
+	"name" : "module7/ajax-tools-bundle",
+	"type" : "symfony-bundle",
+	"description" : "Module 7 Ajax Helper Tools Bundle",
+	"keywords" : [
+		"Module7 Ajax"
+	],
+	"homepage" : "https://www.module-7.com",
+	"license" : "MIT",
+	"authors" : [{
+			"name" : "Javier Gil",
+			"email" : "javier.gil@module-7.com"
+		}, {
+			"name" : "Module-7",
+			"homepage" : "https://www.module-7.com"
+		}
+	],
+	"require" : {
+		"php" : ">=5.3.2",
+		"symfony/framework-bundle" : ">=2.3",
+		"symfony/twig-bundle" : ">=2.3"
+	},
+	"require-dev" : {
+		"symfony/yaml" : ">=2.3"
+	},
+	"autoload" : {
+		"psr-0" : {
+			"Module7\\AjaxToolsBundle\\" : ""
+		}
+	},
+	"target-dir" : "Module7/AjaxToolsBundle",
+	"extra" : {
+		"branch-alias" : {
+			"dev-master" : "dev-master"
+		}
+	}
+}
