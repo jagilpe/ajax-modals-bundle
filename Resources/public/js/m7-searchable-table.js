@@ -1,5 +1,5 @@
 ;(function($, window, document, undefined) {
-    var pluginName = 'pcSearchableTable', dataKey = 'plugin_' + pluginName;
+    var pluginName = 'm7SearchableTable', dataKey = 'plugin_' + pluginName;
     
     var Plugin = function(element, options) {
     	this.element = element;
@@ -65,4 +65,8 @@
 		    }
 		}
     };
+    
+    $(document).ready(function() {
+    	$('.m7-searchable-table').m7SearchableTable();
+    });
 })(jQuery, window, document);
