@@ -1,0 +1,33 @@
+<?php
+
+namespace Module7\AjaxToolsBundle\EventListener;
+
+use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpFoundation\Response;
+use Module7\AjaxToolsBundle\View\AjaxViewInterface;
+use function GuzzleHttp\json_encode;
+
+/**
+ * Generates the right Response object from the AjaxView in Ajax Controllers
+ *
+ * @author Javier Gil Pereda <javier.gil@module-7.com>
+ *
+ */
+class AjaxViewControllerEventListener
+{
+    public function onKernelView(GetResponseForControllerResultEvent $event)
+    {
+        $controllerResult = $event->getControllerResult();
+
+        if (!$controllerResult instanceof AjaxViewInterface) {
+            return;
+        }
+
+        $view = $controllerResult;
+
+        $response = new Response(json_encode($view->getResponse()));
+        $response->headers->set('Content-Type', 'application/json');
+
+        $event->setResponse($response);
+    }
+}
