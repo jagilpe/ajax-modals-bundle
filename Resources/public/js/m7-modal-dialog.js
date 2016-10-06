@@ -5,10 +5,10 @@
     var Plugin = function(element, options) {
         this.element = element;
         this.options = {
-            modalsParkContainerSel: '#eh-modal-dialogs-park-container',
-            modalContainerSel: '#eh-modal-dialogs-modal',
-            embededCollectionSel: '.eh-embeded-entity-collection',
-            embededSelectSel: '.eh-embeded-entity-select',
+            modalsParkContainerSel: '#m7-modal-dialogs-park-container',
+            modalContainerSel: '#m7-modal-dialogs-modal',
+            embededCollectionSel: '.m7-embeded-entity-collection',
+            embededSelectSel: '.m7-embeded-entity-select',
             onReload : function() { },
             onNewFormLoad : function(form) { },
             onSave : function() {},
@@ -27,9 +27,9 @@
             this.modalContainer = $(this.options.modalContainerSel);
             this.modalTitle = this.modalContainer.find('.modal-title span.anchorjs-icon');
             this.modalBody = this.modalContainer.find('.modal-body');
-            this.modalSaveButton = this.modalContainer.find('#eh-modal-dialog-save-submit');
-            this.modalDeleteButton = this.modalContainer.find('#eh-modal-dialog-delete-submit');
-            this.modalCancelButton = this.modalContainer.find('#eh-modal-dialog-cancel-submit');
+            this.modalSaveButton = this.modalContainer.find('#m7-modal-dialog-save-submit');
+            this.modalDeleteButton = this.modalContainer.find('#m7-modal-dialog-delete-submit');
+            this.modalCancelButton = this.modalContainer.find('#m7-modal-dialog-cancel-submit');
             var formType = $element.attr('data-form');
             formType = typeof formType !== 'undefined' ? formType : 'save';
             this.dialogDataOrig = {
