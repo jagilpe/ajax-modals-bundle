@@ -280,9 +280,6 @@
             this._bindKeyEvents(this.modalBody);
             this._setModalTitle(response.title);
 
-            // Call the new form load callback
-            this.options.onNewFormLoad(this.modalBody);
-
             this.dialogData.buttons = response.buttons;
             this.dialogData.title = response.title;
             if (typeof response.form_type !== 'undefined') {
@@ -293,6 +290,9 @@
 
             // Initialize entity collections
             this._initializeEmbededCollections(this.modalBody);
+            
+            // Call the new form load callback
+            this.options.onNewFormLoad(this.modalBody);
 
             this._showModal();
         },
