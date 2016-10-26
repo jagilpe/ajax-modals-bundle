@@ -1,6 +1,7 @@
 ;
 (function($, window, document, undefined) {
-    var pluginName = 'm7ModalDialog', dataKey = 'plugin_' + pluginName;
+    var pluginName = 'm7ModalDialog',
+        dataKey = 'plugin_' + pluginName;
 
     var Plugin = function(element, options) {
         this.element = element;
@@ -9,17 +10,17 @@
             modalContainerSel: '#m7-modal-dialogs-modal',
             embededCollectionSel: '.m7-embeded-entity-collection',
             embededSelectSel: '.m7-embeded-entity-select',
-            onReload : function() { },
-            onNewFormLoad : function(form) { },
-            onSave : function() {},
-            onDelete : function() {}
+            onReload: function() {},
+            onNewFormLoad: function(form) {},
+            onSave: function() {},
+            onDelete: function() {}
         };
 
         this.init(options);
     };
 
     Plugin.prototype = {
-        init : function(options) {
+        init: function(options) {
             $.extend(this.options, options);
             var plugin = this;
             var $element = $(this.element);
@@ -34,112 +35,111 @@
             formType = typeof formType !== 'undefined' ? formType : 'save';
             this.dialogDataOrig = {
                 buttons: {
-                    save : {
+                    save: {
                         label: 'save',
                         new_form: false,
                         show: true,
                         url: ''
                     },
-                    delete : {
+                    delete: {
                         label: 'delete',
                         new_form: true,
                         show: false,
                         url: ''
                     },
-                    cancel : {
+                    cancel: {
                         label: 'cancel',
                         new_form: true,
                         show: true,
                         url: ''
                     }
                 },
-                formType : formType,
-                callbacks : {
-                    save : function() {
+                formType: formType,
+                callbacks: {
+                    save: function() {
                         plugin._sendForm('save', plugin.options.onSave);
                     },
-                    'delete' : function() {
+                    'delete': function() {
                         plugin._sendForm('delete', plugin.options.onDelete);
                     },
-                    'cancel' : function() {
+                    'cancel': function() {
                         plugin._hideModal();
                     }
                 },
-                title : this.modalTitle.text()
+                title: this.modalTitle.text()
             };
-            
+
             this.dialogDataOrig.buttons[formType].url = $element.attr('data-src');
-            
+
             this.dialogData = $.extend({}, this.dialogDataOrig);
-            
+
             this.parkedDialogs = new Array();
-            
+
             // Bind the click event to the element
             $element.click(function() {
                 // First we reset the dialogs containers
                 plugin._resetDialog();
-                
+
                 // Load the first form
                 plugin._loadForm(plugin.dialogData.buttons[plugin.dialogData.formType].url);
             });
         },
-        
-        _initializeEmbededCollections : function(container) {
+
+        _initializeEmbededCollections: function(container) {
             var plugin = this;
             $(container).find(this.options.embededCollectionSel).each(function() {
                 $(this).ehEmbededEntityCollection({
-                    onAddElement : function(formData) {
+                    onAddElement: function(formData) {
                         plugin._onLoadEmbededFormCallback(formData);
                     },
-                    onEditElement : function(formData) {
+                    onEditElement: function(formData) {
                         plugin._onLoadEmbededFormCallback(formData);
                     },
-                    onNewFormLoad : plugin.options.onNewFormLoad
+                    onNewFormLoad: plugin.options.onNewFormLoad
                 });
             });
             $(container).find(this.options.embededSelectSel).each(function() {
                 $(this).ehEmbededEntitySelect({
-                    onAddElement : function(formData) {
+                    onAddElement: function(formData) {
                         plugin._onLoadEmbededFormCallback(formData);
                     },
-                    onEditElement : function(formData) {
+                    onEditElement: function(formData) {
                         plugin._onLoadEmbededFormCallback(formData);
                     },
-                    onNewFormLoad : plugin.options.onNewFormLoad,
-                    onSelectElement : function() {
+                    onNewFormLoad: plugin.options.onNewFormLoad,
+                    onSelectElement: function() {
                         plugin._unparkDialog();
                     }
                 });
             });
         },
-        
-        _onLoadEmbededFormCallback : function(formData) {
+
+        _onLoadEmbededFormCallback: function(formData) {
             var plugin = this;
-            
+
             // First we have to park the current form
             this._parkDialog();
-            
+
             // set the functions
             this.dialogData = {
-                callbacks : {
+                callbacks: {
                     save: function() {
-                        if (typeof plugin.dialogData.buttons.save.url !== 'undefined'
-                            && plugin.dialogData.buttons.save.url !== '') {
+                        if (typeof plugin.dialogData.buttons.save.url !== 'undefined' &&
+                            plugin.dialogData.buttons.save.url !== '') {
                             plugin._sendForm('save', function(result) {
                                 if (!result.error) {
                                     var elementResult = {
-                                        response : result.data,
-                                        element    : plugin.modalBody.children(),
+                                        response: result.data,
+                                        element: plugin.modalBody.children(),
                                     };
                                     if (formData.onSave(elementResult)) {
                                         plugin._unparkDialog();
                                     }
                                 }
                             });
-                        }
-                        else {
+                        } else {
                             var elementResult = {
-                                element    : plugin.modalBody.children(),
+                                element: plugin.modalBody.children(),
                             }
                             if (formData.onSave(elementResult)) {
                                 plugin._unparkDialog();
@@ -148,9 +148,9 @@
                     },
                     delete: function() {
                         var elementResult = {
-                            element : plugin.modalBody.children(),
+                            element: plugin.modalBody.children(),
                         };
-                        
+
                         if (formData.onDelete(elementResult)) {
                             plugin._unparkDialog();
                         }
@@ -161,40 +161,40 @@
                     }
                 }
             }
-            
+
             // Set the buttons info
             this.dialogData.buttons = formData.buttons;
-            
+
             // Set the title of the dialog
             this.dialogData.title = formData.dialogTitle;
-            
+
             // Update the buttons status
             this._updateButtonsStatus();
-            
+
             // Update the dialog title
             this._setModalTitle(this.dialogData.title);
-            
+
             // Initialize entity collections
             this._initializeEmbededCollections(formData.form);
-            
+
             // Now load the form
             this._loadEmbededForm(formData);
         },
-        
-        _loadEmbededForm : function(formData) {
+
+        _loadEmbededForm: function(formData) {
             this.modalBody.append(formData.form);
             this._bindKeyEvents(this.modalBody);
         },
-        
-        _createModalContainer : function(id) {
+
+        _createModalContainer: function(id) {
             var modalContainer = this.modalsPrototype.clone();
             modalContainer.attr('id', id);
             modalContainer.appentTo(this.modalsContainer);
-            
+
             return modalContainer;
         },
-        
-        _resetDialog : function() {
+
+        _resetDialog: function() {
             var plugin = this;
 
             this.dialogData = $.extend({}, this.dialogDataOrig);
@@ -203,29 +203,29 @@
             this.modalSaveButton.click(function() {
                 plugin.dialogData.callbacks.save();
             });
-            
+
             this.modalDeleteButton.unbind('click');
             this.modalDeleteButton.click(function() {
                 plugin.dialogData.callbacks.delete();
             });
-            
+
             this.modalCancelButton.unbind('click');
             this.modalCancelButton.click(function() {
                 plugin.dialogData.callbacks.cancel();
             });
-            
+
             // Bind the after hide event
             this.modalContainer.unbind('hidden.bs.modal');
             this.modalContainer.on('hidden.bs.modal', function(event) {
-                
+
             });
-            
+
             this.modalsParkContainer.empty();
             this.parkedDialogs = new Array();
             this.modalBody.empty();
         },
-        
-        _showModal : function() {
+
+        _showModal: function() {
             var plugin = this;
             this.modalContainer.modal({
                 backdrop: 'static',
@@ -239,177 +239,175 @@
                 }
             });
         },
-        
-        _hideModal : function() {
+
+        _hideModal: function() {
             this.modalContainer.modal('hide');
             $(this.modalContainer).unbind('keyup');
         },
-        
-        _loadForm : function(formUrl) {
+
+        _loadForm: function(formUrl) {
             $.ajax({
-                url : formUrl,
-                context : this,
-                success : function(response) {
+                url: formUrl,
+                context: this,
+                success: function(response) {
                     this._loadContent(response);
                 }
             });
         },
-        
-        _updateButtonsStatus : function() {
+
+        _updateButtonsStatus: function() {
             for (button in this.dialogData.buttons) {
                 var buttonValue = this.dialogData.buttons[button];
                 var buttonName = 'modal' + button.charAt(0).toUpperCase() + button.slice(1) + 'Button';
-               
+
                 // Set the button label if applies
                 if (typeof buttonValue.label !== 'undefined') {
                     this[buttonName].empty();
                     this[buttonName].append(buttonValue.label);
                 }
-                    
+
                 if (buttonValue.show) {
-                	this[buttonName].show();
-                }
-                else {
+                    this[buttonName].show();
+                } else {
                     this[buttonName].hide();
                 }
             }
         },
-        
-        _loadContent : function(response) {
+
+        _loadContent: function(response) {
             this.modalBody.empty()
             this.modalBody.append(response.response);
             this._bindKeyEvents(this.modalBody);
             this._setModalTitle(response.title);
-            
+
             // Call the new form load callback
             this.options.onNewFormLoad(this.modalBody);
-            
+
             this.dialogData.buttons = response.buttons;
             this.dialogData.title = response.title;
             if (typeof response.form_type !== 'undefined') {
                 this.dialogData.form_type = response.form_type;
             }
-            
+
             this._updateButtonsStatus();
-            
+
             // Initialize entity collections
             this._initializeEmbededCollections(this.modalBody);
-            
+
             this._showModal();
         },
-        
-        _parkDialog : function() {
+
+        _parkDialog: function() {
             var dialogToPark = this.modalBody.children();
             dialogToPark.appendTo(this.modalsParkContainer);
-            
+
             var data = {
                 dialog: dialogToPark,
-                dialogData : this.dialogData
+                dialogData: this.dialogData
             };
-            
+
             this.parkedDialogs.push(data);
         },
-        
-        _unparkDialog : function() {
+
+        _unparkDialog: function() {
             var data = this.parkedDialogs.pop();
-            
+
             if (typeof data !== 'undefined') {
                 this.modalBody.empty();
                 this.modalBody.append(data.dialog);
                 this.dialogData = data.dialogData;
-                
+
                 // Update buttons state
                 this._updateButtonsStatus();
-                
-             // Update the dialog title
+
+                // Update the dialog title
                 this._setModalTitle(this.dialogData.title);
             }
         },
-        
-        _setModalTitle : function(title) {
+
+        _setModalTitle: function(title) {
             this.modalTitle.empty();
             this.modalTitle.append(title);
         },
-        
-        _sendForm : function(type, resultCallback) {
+
+        _sendForm: function(type, resultCallback) {
             var form = this.modalBody.find("form");
             var plugin = this;
-            
+
             var formUrl = this.dialogData.buttons[type].url;
-            
+
             if (this.dialogData.buttons[type].new_form) {
                 this.dialogData.formType = type;
-                
+
                 var requestType = 'GET';
                 var data = "";
-                
+
                 this._ajaxRequest(formUrl, requestType, data, type);
-            }
-            else {
+            } else {
                 this.dialogData.formType = type;
-                
+
                 var requestType = "POST";
-                
+
                 var data = new FormData(form[0]);
                 this._ajaxRequest(formUrl, requestType, data, type, resultCallback);
             }
-            
+
         },
-        
-        _ajaxRequest : function(formUrl, requestType, data, type, resultCallback) {
+
+        _ajaxRequest: function(formUrl, requestType, data, type, resultCallback) {
             $.ajax({
-                url : formUrl,
-                type : requestType,
-                data : data,
+                url: formUrl,
+                type: requestType,
+                data: data,
                 contentType: false,
                 processData: false,
-                context : this,
-                success : function(response) {
+                context: this,
+                success: function(response) {
                     switch (response['type']) {
-                    case 'form':
-                        // We have a form to render
-                        this._loadContent(response);
-                        break;
-                    case 'result':
-                        if (typeof resultCallback !== 'undefined') {
-                            var result = {
-                                error: false,
-                                data: response
-                            };
-                            resultCallback(result);
-                        }
-                        break;
-                    case 'redirect':
-                        if (typeof response['url'] !== 'undefined') {
-                            window.location.replace(response['url']);
-                        }
-                        break;
-                    case 'end':
-                        this._hideModal();
-                        if (typeof resultCallback !== 'undefined') {
-                            var result = {
-                                error: false,
-                                data: response
-                            };
-                            resultCallback(result);
-                        }
-                        break;
+                        case 'form':
+                            // We have a form to render
+                            this._loadContent(response);
+                            break;
+                        case 'result':
+                            if (typeof resultCallback !== 'undefined') {
+                                var result = {
+                                    error: false,
+                                    data: response
+                                };
+                                resultCallback(result);
+                            }
+                            break;
+                        case 'redirect':
+                            if (typeof response['url'] !== 'undefined') {
+                                window.location.replace(response['url']);
+                            }
+                            break;
+                        case 'end':
+                            this._hideModal();
+                            if (typeof resultCallback !== 'undefined') {
+                                var result = {
+                                    error: false,
+                                    data: response
+                                };
+                                resultCallback(result);
+                            }
+                            break;
                     }
-                    
+
                 },
-                error : function() {
+                error: function() {
                     if (typeof resultCallback !== 'undefined') {
                         var result = {
-                                error: true
-                            };
-                            
-                            resultCallback(result);
+                            error: true
+                        };
+
+                        resultCallback(result);
                     }
                 }
             });
         },
-        
-        _bindKeyEvents : function(element) {
+
+        _bindKeyEvents: function(element) {
             var plugin = this;
             $(element).find('input').keypress(function(event) {
                 if (event.charCode == 13) {
@@ -418,7 +416,7 @@
                 }
             });
         }
-        
+
     };
 
     $.fn[pluginName] = function(options) {
@@ -430,16 +428,16 @@
             return this.each(function() {
                 if (!$.data(this, 'plugin_' + pluginName)) {
                     $.data(this, 'plugin_' + pluginName, new Plugin(this,
-                            options));
+                        options));
                 }
             });
-        } else if (typeof options === 'string' && options[0] !== '_'
-                && options !== 'init') {
+        } else if (typeof options === 'string' && options[0] !== '_' &&
+            options !== 'init') {
             // Call a public pluguin method (not starting with an
             // underscore) for each
             // selected element.
-            if (Array.prototype.slice.call(args, 1).length == 0
-                    && $.inArray(options, $.fn[pluginName].getters) != -1) {
+            if (Array.prototype.slice.call(args, 1).length == 0 &&
+                $.inArray(options, $.fn[pluginName].getters) != -1) {
                 // If the user does not pass any arguments and the method
                 // allows to
                 // work as a getter then break the chainability so we can
@@ -447,15 +445,15 @@
                 // instead the element reference.
                 var instance = $.data(this[0], 'plugin_' + pluginName);
                 return instance[options].apply(instance, Array.prototype.slice
-                        .call(args, 1));
+                    .call(args, 1));
             } else {
                 // Invoke the speficied method on each selected element
                 return this.each(function() {
                     var instance = $.data(this, 'plugin_' + pluginName);
-                    if (instance instanceof Plugin
-                            && typeof instance[options] === 'function') {
+                    if (instance instanceof Plugin &&
+                        typeof instance[options] === 'function') {
                         instance[options].apply(instance, Array.prototype.slice
-                                .call(args, 1));
+                            .call(args, 1));
                     }
                 });
             }
