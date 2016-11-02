@@ -2,7 +2,7 @@
 (function($, window, document, undefined) {
     var pluginName = 'm7ModalDialog',
         dataKey = 'plugin_' + pluginName;
-
+    
     var Plugin = function(element, options) {
         this.element = element;
         this.options = {
