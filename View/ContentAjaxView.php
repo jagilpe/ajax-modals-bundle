@@ -26,6 +26,11 @@ abstract class ContentAjaxView implements AjaxViewInterface
     protected $buttons = array();
 
     /**
+     * @var array
+     */
+    protected $classes = array();
+
+    /**
      *
      * {@inheritDoc}
      * @see \Module7\AjaxToolsBundle\View\AjaxViewInterface::getResponse()
@@ -38,6 +43,7 @@ abstract class ContentAjaxView implements AjaxViewInterface
             'response' => $this->getContent(),
             'buttons' => $this->getButtonsSpecification(),
         );
+        $response['classes'] = $this->classes;
 
         return $response;
     }
@@ -84,6 +90,16 @@ abstract class ContentAjaxView implements AjaxViewInterface
     {
         $this->content = $content;
         return $this;
+    }
+
+    /**
+     * Adds a class to the root element of the modal
+     *
+     * @param string $class
+     */
+    public function addClass($class)
+    {
+        $this->classes[] = $class;
     }
 
     /**

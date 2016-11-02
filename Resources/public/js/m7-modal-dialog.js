@@ -31,6 +31,7 @@
             this.modalSaveButton = this.modalContainer.find('#m7-modal-dialog-save-submit');
             this.modalDeleteButton = this.modalContainer.find('#m7-modal-dialog-delete-submit');
             this.modalCancelButton = this.modalContainer.find('#m7-modal-dialog-cancel-submit');
+            this.modalClasses = new Array();
             var formType = $element.attr('data-form');
             formType = typeof formType !== 'undefined' ? formType : 'save';
             this.dialogDataOrig = {
@@ -242,6 +243,7 @@
 
         _hideModal: function() {
             this.modalContainer.modal('hide');
+            this._updateClasses(new Array());
             $(this.modalContainer).unbind('keyup');
         },
 
@@ -293,8 +295,25 @@
             
             // Call the new form load callback
             this.options.onNewFormLoad(this.modalBody);
+            
+            if (typeof response.classes !== 'undefined') {
+                this._updateClasses(response.classes);    
+            }
 
             this._showModal();
+        },
+        
+        _updateClasses: function(classes) {
+            // First we have to remove the current classes
+            var plugin = this;
+            this.modalClasses.forEach(function(cssClass) {
+                $(plugin.modalContainer).removeClass(cssClass);
+            });
+            
+            this.modalClasses = classes;
+            this.modalClasses.forEach(function(cssClass) {
+                $(plugin.modalContainer).addClass(cssClass);
+            });
         },
 
         _parkDialog: function() {
