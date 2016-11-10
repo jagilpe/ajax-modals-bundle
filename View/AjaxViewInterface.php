@@ -12,6 +12,8 @@ interface AjaxViewInterface
     const TYPE_END = 'end';
     const TYPE_FORM = 'form';
     const TYPE_ERROR = 'error';
+    const TYPE_PAGE_RELOAD = 'reload';
+    const TYPE_PAGE_REDIRECT = 'redirect';
 
     /**
      * Returns the response data to be sent as a json object

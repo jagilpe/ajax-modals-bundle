@@ -396,6 +396,9 @@
                                 resultCallback(result);
                             }
                             break;
+                        case 'reload':
+                            window.location.reload();
+                            break;
                         case 'redirect':
                             if (typeof response['url'] !== 'undefined') {
                                 window.location.replace(response['url']);
