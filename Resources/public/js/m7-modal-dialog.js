@@ -2,7 +2,7 @@
 (function($, window, document, undefined) {
     var pluginName = 'm7ModalDialog',
         dataKey = 'plugin_' + pluginName;
-    
+
     var Plugin = function(element, options) {
         this.element = element;
         this.options = {
@@ -233,10 +233,29 @@
                 show: true,
                 keyboard: false
             });
+            $(this.modalContainer).keydown(function(event) {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                    return null;
+                }
+            });
             $(this.modalContainer).keyup(function(event) {
                 if (event.keyCode == 27) {
                     // When the user presses escape we click the cancel button
                     plugin.modalCancelButton.click();
+                }
+                else if (event.keyCode == 13) {
+                    event.stopPropagation();
+                    // The user has pressed enter
+                    if (plugin.dialogData.buttons.save.show) {
+                        plugin.modalSaveButton.click();
+                    }
+                    else if (plugin.dialogData.buttons.delete.show) {
+                        plugin.modalDeleteButton.click();
+                    }
+                    else {
+                        plugin.modalCancelButton.click();
+                    }
                 }
             });
         },
@@ -292,24 +311,24 @@
 
             // Initialize entity collections
             this._initializeEmbededCollections(this.modalBody);
-            
+
             // Call the new form load callback
             this.options.onNewFormLoad(this.modalBody);
-            
+
             if (typeof response.classes !== 'undefined') {
-                this._updateClasses(response.classes);    
+                this._updateClasses(response.classes);
             }
 
             this._showModal();
         },
-        
+
         _updateClasses: function(classes) {
             // First we have to remove the current classes
             var plugin = this;
             this.modalClasses.forEach(function(cssClass) {
                 $(plugin.modalContainer).removeClass(cssClass);
             });
-            
+
             this.modalClasses = classes;
             this.modalClasses.forEach(function(cssClass) {
                 $(plugin.modalContainer).addClass(cssClass);
