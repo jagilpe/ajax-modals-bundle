@@ -82,7 +82,7 @@
                 plugin._resetDialog();
 
                 // Load the first form
-                plugin._loadForm(plugin.dialogData.buttons[plugin.dialogData.formType].url);
+                plugin._loadForm($element.attr('data-src'));
             });
         },
 
