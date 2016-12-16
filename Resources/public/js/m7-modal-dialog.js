@@ -7,7 +7,7 @@
         this.element = element;
         this.options = {
             modalsParkContainerSel: '#m7-modal-dialogs-park-container',
-            modalContainerSel: '#m7-modal-dialogs-modal',
+            modalContainerSel: $.fn[pluginName].defaults.modalContainerSel,
             embededCollectionSel: '.m7-embeded-entity-collection',
             embededSelectSel: '.m7-embeded-entity-select',
             onReload: function() {},
@@ -184,7 +184,6 @@
 
         _loadEmbededForm: function(formData) {
             this.modalBody.append(formData.form);
-            this._bindKeyEvents(this.modalBody);
         },
 
         _createModalContainer: function(id) {
@@ -233,13 +232,8 @@
                 show: true,
                 keyboard: false
             });
-            $(this.modalContainer).keydown(function(event) {
-                if (event.keyCode == 13) {
-                    event.preventDefault();
-                    return null;
-                }
-            });
-            $(this.modalContainer).keyup(function(event) {
+
+            $.fn[pluginName].defaults.onKeypressHandler = function(event) {
                 if (event.keyCode == 27) {
                     // When the user presses escape we click the cancel button
                     plugin.modalCancelButton.click();
@@ -257,7 +251,7 @@
                         plugin.modalCancelButton.click();
                     }
                 }
-            });
+            };
         },
 
         _hideModal: function() {
@@ -500,4 +494,15 @@
             }
         }
     };
+
+    // Bind the key events for the modal container
+    // this has to be done once, because all instances share the same modal container
+    $.fn[pluginName].defaults = {
+        modalContainerSel: '#m7-modal-dialogs-modal',
+        onKeypressHandler : function(event) {}
+    };
+    $($.fn[pluginName].defaults.modalContainerSel).keyup(function(event) {
+        $.fn[pluginName].defaults.onKeypressHandler(event);
+    });
+
 })(jQuery, window, document);
