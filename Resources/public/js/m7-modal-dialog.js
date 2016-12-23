@@ -241,6 +241,7 @@
                 else if (event.keyCode == 13) {
                     event.stopPropagation();
                     // The user has pressed enter
+
                     if (plugin.dialogData.buttons.save.show) {
                         plugin.modalSaveButton.click();
                     }
@@ -250,6 +251,7 @@
                     else {
                         plugin.modalCancelButton.click();
                     }
+                    return false;
                 }
             };
         },
@@ -501,8 +503,8 @@
         modalContainerSel: '#m7-modal-dialogs-modal',
         onKeypressHandler : function(event) {}
     };
-    $($.fn[pluginName].defaults.modalContainerSel).keyup(function(event) {
-        $.fn[pluginName].defaults.onKeypressHandler(event);
+    $($.fn[pluginName].defaults.modalContainerSel).keydown(function(event) {
+        return $.fn[pluginName].defaults.onKeypressHandler(event);
     });
 
 })(jQuery, window, document);
