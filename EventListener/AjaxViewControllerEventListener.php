@@ -5,7 +5,6 @@ namespace Module7\AjaxToolsBundle\EventListener;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpFoundation\Response;
 use Module7\AjaxToolsBundle\View\AjaxViewInterface;
-use function GuzzleHttp\json_encode;
 
 /**
  * Generates the right Response object from the AjaxView in Ajax Controllers
