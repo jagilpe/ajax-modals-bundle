@@ -1,9 +1,9 @@
 <?php
 
-namespace Module7\AjaxToolsBundle\View;
+namespace Jagilpe\AjaxModalsBundle\View;
 
-use Module7\AjaxToolsBundle\View\AjaxViewInterface;
-use Module7\AjaxToolsBundle\Exception\AjaxToolsException;
+use Jagilpe\AjaxModalsBundle\View\AjaxViewInterface;
+use Jagilpe\AjaxModalsBundle\Exception\AjaxModalsException;
 
 abstract class ContentAjaxView implements AjaxViewInterface
 {
@@ -33,7 +33,7 @@ abstract class ContentAjaxView implements AjaxViewInterface
     /**
      *
      * {@inheritDoc}
-     * @see \Module7\AjaxToolsBundle\View\AjaxViewInterface::getResponse()
+     * @see \Jagilpe\AjaxModalsBundle\View\AjaxViewInterface::getResponse()
      */
     public function getResponse()
     {
@@ -62,7 +62,7 @@ abstract class ContentAjaxView implements AjaxViewInterface
      * Sets the title of the view
      *
      * @param string $title
-     * @return \Module7\AjaxToolsBundle\View\ContentAjaxView
+     * @return \Jagilpe\AjaxModalsBundle\View\ContentAjaxView
      */
     public function setTitle($title)
     {
@@ -84,7 +84,7 @@ abstract class ContentAjaxView implements AjaxViewInterface
      * Sets the content of the view
      *
      * @param string $content
-     * @return \Module7\AjaxToolsBundle\View\ContentAjaxView
+     * @return \Jagilpe\AjaxModalsBundle\View\ContentAjaxView
      */
     public function setContent($content)
     {

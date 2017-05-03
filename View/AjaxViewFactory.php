@@ -1,8 +1,8 @@
 <?php
 
-namespace Module7\AjaxToolsBundle\View;
+namespace Jagilpe\AjaxModalsBundle\View;
 
-use Module7\AjaxToolsBundle\Exception\AjaxToolsException;
+use Jagilpe\AjaxModalsBundle\Exception\AjaxModalsException;
 
 /**
  * Factory class for the AjaxViews
@@ -29,6 +29,6 @@ class AjaxViewFactory
             }
         }
 
-        throw new AjaxToolsException("View type $viewType does not exists.");
+        throw new AjaxModalsException("View type $viewType does not exists.");
     }
 }

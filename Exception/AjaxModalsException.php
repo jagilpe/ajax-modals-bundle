@@ -1,6 +1,6 @@
 <?php
 
-namespace Module7\AjaxToolsBundle\Exception;
+namespace Jagilpe\AjaxModalsBundle\Exception;
 
 /**
  * Base Class for the Exception of the AjaxTools Bundle
@@ -8,7 +8,7 @@ namespace Module7\AjaxToolsBundle\Exception;
  * @author Javier Gil Pereda <javier.gil@module-7.com>
  *
  */
-class AjaxToolsException extends \Exception
+class AjaxModalsException extends \Exception
 {
 
 }

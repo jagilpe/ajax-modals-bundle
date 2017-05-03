@@ -1,6 +1,6 @@
 <?php
 
-namespace Module7\AjaxToolsBundle\View;
+namespace Jagilpe\AjaxModalsBundle\View;
 
 /**
  * Defines a view to use as a response in an Ajax Controller
@@ -24,7 +24,7 @@ class ErrorAjaxView implements AjaxViewInterface
     /**
      *
      * {@inheritDoc}
-     * @see \Module7\AjaxToolsBundle\View\AjaxViewInterface::getResponse()
+     * @see \Jagilpe\AjaxModalsBundle\View\AjaxViewInterface::getResponse()
      */
     public function getResponse()
     {

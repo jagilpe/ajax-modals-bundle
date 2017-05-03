@@ -1,6 +1,6 @@
 <?php
 
-namespace Module7\AjaxToolsBundle\DependencyInjection;
+namespace Jagilpe\AjaxModalsBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * @author Javier Gil Pereda <javier.gil@module-7.com>
  */
-class Module7AjaxToolsExtension extends Extension
+class JagilpeAjaxModalsExtension extends Extension
 {
     /**
      * {@inheritdoc}

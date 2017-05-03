@@ -1,0 +1,1 @@
+## A Symfony Bundle for generating ajax dialogs using Bootstrap Modal API

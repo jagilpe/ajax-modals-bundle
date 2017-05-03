@@ -1,6 +1,6 @@
 <?php
 
-namespace Module7\AjaxToolsBundle;
+namespace Jagilpe\AjaxModalsBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  *
  * @author Javier Gil Pereda <javier.gil@module-7.com>
  */
-class Module7AjaxToolsBundle extends Bundle
+class JagilpeAjaxModalsBundle extends Bundle
 {
 
 }

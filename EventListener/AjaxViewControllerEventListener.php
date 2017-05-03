@@ -1,10 +1,10 @@
 <?php
 
-namespace Module7\AjaxToolsBundle\EventListener;
+namespace Jagilpe\AjaxModalsBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpFoundation\Response;
-use Module7\AjaxToolsBundle\View\AjaxViewInterface;
+use Jagilpe\AjaxModalsBundle\View\AjaxViewInterface;
 
 /**
  * Generates the right Response object from the AjaxView in Ajax Controllers

@@ -1,9 +1,9 @@
 <?php
 
-namespace Module7\AjaxToolsBundle\View;
+namespace Jagilpe\AjaxModalsBundle\View;
 
-use Module7\AjaxToolsBundle\View\AjaxViewInterface;
-use Module7\AjaxToolsBundle\Exception\AjaxToolsException;
+use Jagilpe\AjaxModalsBundle\View\AjaxViewInterface;
+use Jagilpe\AjaxModalsBundle\Exception\AjaxModalsException;
 
 class FormAjaxView extends ContentAjaxView
 {
@@ -33,7 +33,7 @@ class FormAjaxView extends ContentAjaxView
             return $this->buttons[$buttonName];
         }
         else {
-            throw new AjaxToolsException("Button $buttonName does not exists.");
+            throw new AjaxModalsException("Button $buttonName does not exists.");
         }
     }
 }

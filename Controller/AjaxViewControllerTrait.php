@@ -1,9 +1,8 @@
 <?php
 
-namespace Module7\AjaxToolsBundle\Controller;
+namespace Jagilpe\AjaxModalsBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Module7\AjaxToolsBundle\View\AjaxViewInterface;
+use Jagilpe\AjaxModalsBundle\View\AjaxViewInterface;
 
 /**
  * Base trait to work with Ajax View in a controller

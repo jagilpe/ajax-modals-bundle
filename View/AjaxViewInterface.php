@@ -1,6 +1,6 @@
 <?php
 
-namespace Module7\AjaxToolsBundle\View;
+namespace Jagilpe\AjaxModalsBundle\View;
 
 /**
  * Defines an interface for the AjaxView reponses

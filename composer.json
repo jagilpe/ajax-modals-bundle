@@ -21,7 +21,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"Module7\\AjaxToolsBundle\\" : ""
+			"Jagilpe\\AjaxModalsBundle\\" : ""
 		}
 	},
 	"minimum-stability": "dev",

@@ -1,0 +1,21 @@
+{% set translation_domain = translation_domain is defined ? translation_domain : 'messages'  %}
+{% trans_default_domain translation_domain %}
+
+<div id="jgp-modal-dialogs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            	<h4 class="modal-title" id="myModalLabel"><span class="anchorjs-icon"></span></h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button id="jgp-modal-dialog-save-submit" type="button" class="btn btn-danger">{{ 'save_changes'|trans }}</button>
+                <button id="jgp-modal-dialog-cancel-submit" type="button" class="btn btn-default">{{ 'cancel'|trans }}</button>
+                <button id="jgp-modal-dialog-delete-submit" type="button" class="btn btn-default">{{ 'delete'|trans }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="jgp-modal-dialogs-park-container" style="display: none">
+</div>

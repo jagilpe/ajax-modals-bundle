@@ -1,8 +1,8 @@
 <?php
 
-namespace Module7\AjaxToolsBundle\View;
+namespace Jagilpe\AjaxModalsBundle\View;
 
-use Module7\AjaxToolsBundle\View\ContentAjaxView;
+use Jagilpe\AjaxModalsBundle\View\ContentAjaxView;
 
 class FeedbackAjaxView extends ContentAjaxView
 {
@@ -24,7 +24,7 @@ class FeedbackAjaxView extends ContentAjaxView
     /**
      *
      * {@inheritDoc}
-     * @see \Module7\AjaxToolsBundle\View\AjaxViewInterface::getResponse()
+     * @see \Jagilpe\AjaxModalsBundle\View\AjaxViewInterface::getResponse()
      */
     public function getResponse()
     {

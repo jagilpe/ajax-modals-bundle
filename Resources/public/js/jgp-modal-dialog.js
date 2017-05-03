@@ -1,15 +1,15 @@
 ;
 (function($, window, document, undefined) {
-    var pluginName = 'm7ModalDialog',
+    var pluginName = 'jgpModalDialog',
         dataKey = 'plugin_' + pluginName;
 
     var Plugin = function(element, options) {
         this.element = element;
         this.options = {
-            modalsParkContainerSel: '#m7-modal-dialogs-park-container',
+            modalsParkContainerSel: '#jgp-modal-dialogs-park-container',
             modalContainerSel: $.fn[pluginName].defaults.modalContainerSel,
-            embededCollectionSel: '.m7-embeded-entity-collection',
-            embededSelectSel: '.m7-embeded-entity-select',
+            embededCollectionSel: '.jgp-embeded-entity-collection',
+            embededSelectSel: '.jgp-embeded-entity-select',
             onReload: function() {},
             onNewFormLoad: function(form) {},
             onSave: function() {},
@@ -28,9 +28,9 @@
             this.modalContainer = $(this.options.modalContainerSel);
             this.modalTitle = this.modalContainer.find('.modal-title span.anchorjs-icon');
             this.modalBody = this.modalContainer.find('.modal-body');
-            this.modalSaveButton = this.modalContainer.find('#m7-modal-dialog-save-submit');
-            this.modalDeleteButton = this.modalContainer.find('#m7-modal-dialog-delete-submit');
-            this.modalCancelButton = this.modalContainer.find('#m7-modal-dialog-cancel-submit');
+            this.modalSaveButton = this.modalContainer.find('#jgp-modal-dialog-save-submit');
+            this.modalDeleteButton = this.modalContainer.find('#jgp-modal-dialog-delete-submit');
+            this.modalCancelButton = this.modalContainer.find('#jgp-modal-dialog-cancel-submit');
             this.modalClasses = new Array();
             var formType = $element.attr('data-form');
             formType = typeof formType !== 'undefined' ? formType : 'save';
@@ -500,7 +500,7 @@
     // Bind the key events for the modal container
     // this has to be done once, because all instances share the same modal container
     $.fn[pluginName].defaults = {
-        modalContainerSel: '#m7-modal-dialogs-modal',
+        modalContainerSel: '#jgp-modal-dialogs-modal',
         onKeypressHandler : function(event) {}
     };
     $($.fn[pluginName].defaults.modalContainerSel).keydown(function(event) {

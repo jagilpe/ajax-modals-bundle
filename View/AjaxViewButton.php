@@ -1,8 +1,8 @@
 <?php
 
-namespace Module7\AjaxToolsBundle\View;
+namespace Jagilpe\AjaxModalsBundle\View;
 
-use Module7\AjaxToolsBundle\View\AjaxViewButtonInterface;
+use Jagilpe\AjaxModalsBundle\View\AjaxViewButtonInterface;
 
 /**
  * Represents a button in a AjaxView
@@ -50,7 +50,7 @@ class AjaxViewButton implements AjaxViewButtonInterface
 
     /**
      * {@inheritDoc}
-     * @see \Module7\AjaxToolsBundle\View\AjaxViewButtonInterface::getName()
+     * @see \Jagilpe\AjaxModalsBundle\View\AjaxViewButtonInterface::getName()
      */
     public function getName()
     {
@@ -60,7 +60,7 @@ class AjaxViewButton implements AjaxViewButtonInterface
     /**
      *
      * {@inheritDoc}
-     * @see \Module7\AjaxToolsBundle\View\AjaxViewButtonInterface::getButtonSpecification()
+     * @see \Jagilpe\AjaxModalsBundle\View\AjaxViewButtonInterface::getButtonSpecification()
      */
     public function getButtonSpecification()
     {
