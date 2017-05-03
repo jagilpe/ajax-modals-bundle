@@ -1,18 +1,14 @@
 {
-	"name" : "module7/ajax-tools-bundle",
+	"name" : "jagilpe/ajax-modals-bundle",
 	"type" : "symfony-bundle",
-	"description" : "Module 7 Ajax Helper Tools Bundle",
+	"description" : "Symfony Bundle to generate dialogs using Bootstrap Modal",
 	"keywords" : [
-		"Module7 Ajax"
+		"Ajax Bootstrap Modal Dialog"
 	],
-	"homepage" : "https://www.module-7.com",
 	"license" : "MIT",
 	"authors" : [{
 			"name" : "Javier Gil",
-			"email" : "javier.gil@module-7.com"
-		}, {
-			"name" : "Module-7",
-			"homepage" : "https://www.module-7.com"
+			"email" : "javier@gilpereda.com"
 		}
 	],
 	"require" : {
@@ -24,14 +20,10 @@
 		"symfony/yaml" : ">=2.3"
 	},
 	"autoload" : {
-		"psr-0" : {
+		"psr-4" : {
 			"Module7\\AjaxToolsBundle\\" : ""
 		}
 	},
-	"target-dir" : "Module7/AjaxToolsBundle",
-	"extra" : {
-		"branch-alias" : {
-			"dev-master" : "dev-master"
-		}
-	}
+	"minimum-stability": "dev",
+	"prefer-stable": true
 }
