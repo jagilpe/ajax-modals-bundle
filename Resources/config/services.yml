@@ -1,16 +1,16 @@
 services:
-    jgp_ajax_tools.ajax_views.factory:
+    jgp_ajax_modals.ajax_views.factory:
         class: Jagilpe\AjaxModalsBundle\View\AjaxViewFactory
 
     # Twig extension
-    jgp_ajax_tools.twig_extension:
+    jgp_ajax_modals.twig_extension:
         class: Jagilpe\AjaxModalsBundle\Twig\JagilpeAjaxModalsExtension
         public: false
         tags:
             - { name: twig.extension }
 
     # Event listeners
-    jgp_ajax_tools.ajax_view_controller_listener:
+    jgp_ajax_modals.ajax_view_controller_listener:
         class: Jagilpe\AjaxModalsBundle\EventListener\AjaxViewControllerEventListener
         tags:
             - { name: kernel.event_listener, event: kernel.view }

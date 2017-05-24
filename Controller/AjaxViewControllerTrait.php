@@ -20,7 +20,7 @@ trait AjaxViewControllerTrait
      */
     protected function createAjaxView($viewType)
     {
-        $ajaxViewsFactory = $this->get('m7_ajax_tools.ajax_views.factory');
+        $ajaxViewsFactory = $this->get('jgp_ajax_modals.ajax_views.factory');
 
         return $ajaxViewsFactory->createView($viewType);
     }
