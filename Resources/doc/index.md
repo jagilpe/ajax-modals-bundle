@@ -175,7 +175,7 @@ class MyAjaxController extends Controller
             $view = $this->createAjaxView(FormAjaxView::class);
             $view->setTitle("Title of the dialog");
             $view->setContent(
-                $this->renderView(':ajax_views:my-ajax-dialog.html.twig', array('form' => $form,))
+                $this->renderView(':ajax_views:my-ajax-dialog.html.twig', array('form' => $form->createView(),))
             );
             // Configure the save button
             $view->getButton(FormAjaxView::BUTTON_SAVE)
