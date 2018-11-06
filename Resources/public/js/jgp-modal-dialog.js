@@ -273,7 +273,7 @@
         },
 
         _updateButtonsStatus: function() {
-            for (button in this.dialogData.buttons) {
+            for (var button in this.dialogData.buttons) {
                 var buttonValue = this.dialogData.buttons[button];
                 var buttonName = 'modal' + button.charAt(0).toUpperCase() + button.slice(1) + 'Button';
 
